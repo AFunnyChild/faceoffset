@@ -75,6 +75,7 @@ public abstract class CameraActivity extends AppCompatActivity implements
         findViewById(R.id.btn_face_close).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                KitCore.release();
                 finish();
             }
         });
