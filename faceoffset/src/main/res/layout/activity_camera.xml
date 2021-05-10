@@ -1,0 +1,37 @@
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#00000000">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#00000000"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:id="@+id/container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/main_text_color_edit" />
+
+        <Button
+            android:layout_marginTop="20dp"
+            android:layout_below="@+id/detect"
+            android:layout_alignLeft="@+id/detect"
+            android:id="@+id/btn_face_close"
+            android:layout_width="160dp"
+            android:layout_height="100dp"
+            android:background="#99ff88"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:text="点击关闭"
+            android:textSize="20dp"
+            android:topRightRadius="20dp"
+            android:bottomRightRadius="20dp"
+
+            android:bottomLeftRadius="20dp"/>
+    </RelativeLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
