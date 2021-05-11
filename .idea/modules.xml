@@ -3,10 +3,13 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Face.iml" filepath="$PROJECT_DIR$/.idea/modules/Face.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/facechair/Face-facechair.iml" filepath="$PROJECT_DIR$/.idea/modules/facechair/Face-facechair.iml" group="Face/facechair" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/faceoffset/Face-faceoffset.iml" filepath="$PROJECT_DIR$/.idea/modules/faceoffset/Face-faceoffset.iml" group="Face/faceoffset" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Face.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Face.app.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/FaceDemo-Face.iml" filepath="$PROJECT_DIR$/.idea/modules/FaceDemo-Face.iml" group="Face" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/facechair/facechair.iml" filepath="$PROJECT_DIR$/.idea/modules/facechair/facechair.iml" group="Face/facechair" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/faceoffset.iml" filepath="$PROJECT_DIR$/.idea/modules/app/faceoffset.iml" group="Face/faceoffset" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/faceoffset-Face.iml" filepath="$PROJECT_DIR$/.idea/modules/faceoffset-Face.iml" group="Face" />
     </modules>
   </component>
 </project>
