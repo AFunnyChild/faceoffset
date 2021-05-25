@@ -83,7 +83,7 @@ public class ClassifierActivity extends CameraActivity {
                 faceDetectInfos = faceDetect.getDetectInfos();
                 landmarkInfos = faceDetect.landmark2d();
               String  info= "roll="+ (int)landmarkInfos.get(0).roll+"- yaw"+(int)landmarkInfos.get(0).yaw;
-                faceOffset((int)landmarkInfos.get(0).roll,(int)landmarkInfos.get(0).yaw);
+                faceOffset(landmarkInfos.get(0).roll,landmarkInfos.get(0).yaw);
               tv_log.setText(info);
             }
 
@@ -116,5 +116,5 @@ public class ClassifierActivity extends CameraActivity {
 
         });
     }
-    public static native   void  faceOffset(int roll,int yaw);
+    public static native   void  faceOffset(float roll,float yaw);
 }
