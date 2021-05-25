@@ -27,7 +27,7 @@
             android:name="com.faceDemo.activity.faceMainActivity"
             android:configChanges="density|fontScale|keyboard|keyboardHidden|layoutDirection|locale|mnc|mcc|navigation|orientation|screenLayout|screenSize|smallestScreenSize|uiMode|touchscreen"
             android:hardwareAccelerated="true"
-            android:screenOrientation="portrait">
+            android:screenOrientation="landscape">
 
         </activity>
 
@@ -35,14 +35,14 @@
             android:name="com.faceDemo.activity.CameraActivity"
             android:configChanges="density|fontScale|keyboard|keyboardHidden|layoutDirection|locale|mnc|mcc|navigation|orientation|screenLayout|screenSize|smallestScreenSize|uiMode|touchscreen"
             android:resizeableActivity="false"
-            android:screenOrientation="portrait"
+            android:screenOrientation="landscape"
             android:theme="@style/XYAppThemeNoBar"
             />
         <activity
             android:name="com.faceDemo.activity.ClassifierActivity"
             android:configChanges="density|fontScale|keyboard|keyboardHidden|layoutDirection|locale|mnc|mcc|navigation|orientation|screenLayout|screenSize|smallestScreenSize|uiMode|touchscreen"
             android:resizeableActivity="false"
-            android:screenOrientation="portrait"
+            android:screenOrientation="landscape"
             android:theme="@style/XYAppThemeNoBar"
             />
     </application>
