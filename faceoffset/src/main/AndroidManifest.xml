@@ -39,11 +39,13 @@
             android:theme="@style/XYAppThemeNoBar"
             />
         <activity
+
+
             android:name="com.faceDemo.activity.ClassifierActivity"
             android:configChanges="density|fontScale|keyboard|keyboardHidden|layoutDirection|locale|mnc|mcc|navigation|orientation|screenLayout|screenSize|smallestScreenSize|uiMode|touchscreen"
             android:resizeableActivity="false"
             android:screenOrientation="landscape"
-            android:theme="@style/XYAppThemeNoBar"
+            android:theme="@style/XYAppThemeNoBar2"
             />
     </application>
 

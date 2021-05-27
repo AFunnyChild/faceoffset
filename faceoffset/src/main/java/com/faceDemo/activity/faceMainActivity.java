@@ -1,6 +1,7 @@
 package com.faceDemo.activity;
 
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.faceDemo.R;
 import com.faceDemo.utils.PermissionUtils;
@@ -17,6 +19,7 @@ public class faceMainActivity extends AppCompatActivity implements View.OnClickL
     public static String TAG = "MainActivity";
     private ImageView mEffectVideo;
 
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,6 +27,16 @@ public class faceMainActivity extends AppCompatActivity implements View.OnClickL
         setContentView(R.layout.activity_main_face);
         findViewById(R.id.detect).setOnClickListener(this);
         findViewById(R.id.btn_face_close).setOnClickListener(this);
+         ActivityFaceList.getInstance().addActivity(this);
+
+    }
+
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
     }
 
     @Override
@@ -31,7 +44,9 @@ public class faceMainActivity extends AppCompatActivity implements View.OnClickL
         if (v.getId()==R.id.detect){
             startVideoWithFaceDetected();
         }else  if(v.getId()==R.id.btn_face_close){
-            finish();
+        ActivityFaceList.getInstance().FinishActivity();
+        //    finish();
+
         }
 
     }
@@ -48,7 +63,9 @@ public class faceMainActivity extends AppCompatActivity implements View.OnClickL
     public void jumpToCameraActivity()
     {
         Intent intent = new Intent(faceMainActivity.this, ClassifierActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
+
     }
 
     @Override

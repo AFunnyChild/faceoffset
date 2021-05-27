@@ -51,13 +51,42 @@
         <item name="colorPrimaryDark">@android:color/transparent</item>
         <item name="android:textColorSecondary">#de000000</item>
         <item name="windowNoTitle">true</item>
-        <item name="android:windowFullscreen">true</item>
+
 
         <item name="android:windowBackground">@null</item>
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowAnimationStyle">@null</item>
         <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsTranslucent">true</item>
         <!--<item name="actionOverflowButtonStyle">@style/MyOverflowButtonStyle</item>-->
+
+    </style>
+  <!-- xy add -->
+    <style name="XYAppThemeNoBar2" parent="Theme.AppCompat.Light.NoActionBar">
+
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimaryDark">@android:color/transparent</item>
+        <item name="android:textColorSecondary">#de000000</item>
+        <item name="windowNoTitle">true</item>
+
+
+        <item name="android:windowBackground">@null</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowAnimationStyle">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowIsFloating">true</item>
+
+        <!-- 窗体没有边框 -->
+        <item name="android:windowFrame">@null</item>
+
+        <!-- 不允许窗体背景变暗-->
+        <item name="android:backgroundDimEnabled">false</item>
+
+        <!-- 禁用窗口的预览动画-->
+        <item name="android:windowDisablePreview">true</item>
+        <item name="android:windowNoDisplay">false</item>
+
 
     </style>
 

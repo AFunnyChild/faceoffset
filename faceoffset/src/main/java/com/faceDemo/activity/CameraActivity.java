@@ -16,12 +16,14 @@
 
 package com.faceDemo.activity;
 
+import android.content.pm.PackageManager;
 import android.hardware.Camera;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.util.Log;
 import android.util.Size;
+import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -31,6 +33,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.faceDemo.R;
 import com.faceDemo.currencyview.LegacyCameraConnectionFragment;
 import com.faceDemo.utils.MyLogger;
+import com.faceDemo.utils.PermissionUtils;
 import com.faceDemo.utils.SensorEventUtil;
 import com.tenginekit.AndroidConfig;
 import com.tenginekit.KitCore;
@@ -64,6 +67,7 @@ public abstract class CameraActivity extends AppCompatActivity implements
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(null);
+        ActivityFaceList.getInstance().addActivity(this);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 //        Window window=getWindow();
 //        WindowManager.LayoutParams wl = window.getAttributes();
@@ -71,6 +75,20 @@ public abstract class CameraActivity extends AppCompatActivity implements
 ////这句就是设置窗口里控件的透明度的．０.０全透明．１.０不透明．
 //        wl.alpha=0f;
 //        window.setAttributes(wl);
+        //左上角显示
+        Window window = getWindow();
+        window.setGravity(Gravity.START|Gravity.TOP);
+
+        //设置为1像素大小
+        WindowManager.LayoutParams params = window.getAttributes();
+        params.flags = WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;
+
+        params.x = 0;
+        params.y = 0;
+        params.width = 400;
+        params.height = 400;
+        params.alpha=0;
+        window.setAttributes(params);
         setContentView(R.layout.activity_camera);
         findViewById(R.id.btn_face_close).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,7 +98,38 @@ public abstract class CameraActivity extends AppCompatActivity implements
                 finish();
             }
         });
-        setFragment();
+
+        startVideoWithFaceDetected();
+
+    }
+    public  void CloseAndFinish(){
+        sensorEventUtil=null;
+        KitCore.release();
+        finish();
+
+    }
+    private void startVideoWithFaceDetected() {
+        PermissionUtils.checkPermission(this, new Runnable() {
+            @Override
+            public void run() {
+                setFragment();
+            }
+        });
+    }
+    @Override
+    public void onRequestPermissionsResult(final int requestCode, final String[] permissions, final int[] grantResults) {
+        if (requestCode == 1) {
+            if (grantResults.length > 0
+                    && grantResults[0] == PackageManager.PERMISSION_GRANTED
+                    ) {
+                startVideoWithFaceDetected();
+            } else {
+                startVideoWithFaceDetected();
+            }
+        }
+    }
+
+    private void jumpToCameraActivity() {
 
     }
 

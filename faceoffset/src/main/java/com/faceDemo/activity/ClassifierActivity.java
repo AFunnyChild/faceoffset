@@ -1,10 +1,15 @@
 package com.faceDemo.activity;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.util.Log;
 import android.util.Size;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.faceDemo.R;
 import com.faceDemo.camera.CameraEngine;
@@ -13,6 +18,7 @@ import com.faceDemo.encoder.BitmapEncoder;
 import com.faceDemo.encoder.CircleEncoder;
 import com.faceDemo.encoder.EncoderBus;
 import com.faceDemo.encoder.RectEncoder;
+import com.faceDemo.utils.PermissionUtils;
 import com.tenginekit.KitCore;
 import com.tenginekit.face.Face;
 import com.tenginekit.face.FaceDetectInfo;
@@ -25,11 +31,12 @@ import java.util.List;
 
 public class ClassifierActivity extends CameraActivity {
 
+
+
     private static final String TAG = "ClassifierActivity";
 
     private OverlayView trackingOverlay;
     TextView   tv_log;
-
     @Override
     protected int getLayoutId() {
         return R.layout.camera_connection_fragment;
@@ -51,6 +58,7 @@ public class ClassifierActivity extends CameraActivity {
 
     @Override
     public void onPreviewSizeChosen(final Size size) {
+
         Registe();
         EncoderBus.GetInstance().onSetFrameConfiguration(previewHeight, previewWidth);
 
@@ -85,6 +93,7 @@ public class ClassifierActivity extends CameraActivity {
               String  info= "roll="+ (int)landmarkInfos.get(0).roll+"- yaw"+(int)landmarkInfos.get(0).yaw;
                 faceOffset((int)(landmarkInfos.get(0).roll*1000),(int)(landmarkInfos.get(0).yaw*1000));
               tv_log.setText(info);
+                Log.e(TAG, info);
             }
 
             Log.d("#####", "processImage: " + faceDetectInfos.size());
@@ -117,4 +126,5 @@ public class ClassifierActivity extends CameraActivity {
         });
     }
     public static native   void  faceOffset(int roll,int yaw);
+   // public static    void  faceOffset(int roll,int yaw){};
 }
