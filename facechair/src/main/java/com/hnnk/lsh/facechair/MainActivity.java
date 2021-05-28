@@ -16,7 +16,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        startActivity(new Intent(this, ClassifierActivity.class));
+        Intent intent = new Intent(this, ClassifierActivity.class);
+        intent.putExtra("visible",true);
+
+        startActivity(intent);
         findViewById(R.id.btn_face_close).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -29,5 +32,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         //finish();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
     }
 }

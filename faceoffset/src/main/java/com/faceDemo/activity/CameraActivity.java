@@ -88,6 +88,10 @@ public abstract class CameraActivity extends AppCompatActivity implements
         params.width = 400;
         params.height = 400;
         params.alpha=0;
+        boolean visible = getIntent().getBooleanExtra("visible", false);
+        if (visible){
+            params.alpha=100;
+        }
         window.setAttributes(params);
         setContentView(R.layout.activity_camera);
         findViewById(R.id.btn_face_close).setOnClickListener(new View.OnClickListener() {
