@@ -64,6 +64,7 @@ public class ClassifierActivity extends CameraActivity {
 
         trackingOverlay = (OverlayView) findViewById(R.id.facing_overlay);
         tv_log=findViewById(R.id.tv_log);
+        moveTaskToBack(true);
         trackingOverlay.addCallback(new OverlayView.DrawCallback() {
             @Override
             public void drawCallback(final Canvas canvas) {
@@ -93,10 +94,10 @@ public class ClassifierActivity extends CameraActivity {
               String  info= "roll="+ (int)landmarkInfos.get(0).roll+"- yaw"+(int)landmarkInfos.get(0).yaw;
                 faceOffset((int)(landmarkInfos.get(0).roll*1000),(int)(landmarkInfos.get(0).yaw*1000));
               tv_log.setText(info);
-                Log.e(TAG, info);
+              //  Log.e(TAG, info);
             }
 
-            Log.d("#####", "processImage: " + faceDetectInfos.size());
+       //     Log.d("#####", "processImage: " + faceDetectInfos.size());
             if (faceDetectInfos != null && faceDetectInfos.size() > 0) {
                 Rect[] face_rect = new Rect[faceDetectInfos.size()];
 
@@ -126,5 +127,5 @@ public class ClassifierActivity extends CameraActivity {
         });
     }
     public static native   void  faceOffset(int roll,int yaw);
-   // public static    void  faceOffset(int roll,int yaw){};
+    //public static    void  faceOffset(int roll,int yaw){};
 }

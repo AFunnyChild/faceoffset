@@ -16,10 +16,16 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
+        android:id="@+id/btn_face_open"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="open"
+
+        />    <Button
         android:id="@+id/btn_face_close"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Button"
+        android:text="close"
 
         />
 

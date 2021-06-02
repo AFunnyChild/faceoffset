@@ -16,10 +16,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Intent intent = new Intent(this, ClassifierActivity.class);
-        intent.putExtra("visible",true);
 
-        startActivity(intent);
         findViewById(R.id.btn_face_close).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -29,6 +26,13 @@ public class MainActivity extends AppCompatActivity {
                       ActivityFaceList.getInstance().FinishActivity();
                   }
               });
+            }
+        });      findViewById(R.id.btn_face_open).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, ClassifierActivity.class);
+                intent.putExtra("visible",false);
+                startActivity(intent);
             }
         });
         //finish();
