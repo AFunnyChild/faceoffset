@@ -81,8 +81,9 @@ public class ClassifierActivity extends CameraActivity {
             public void run() {
                 super.run();
                 while (mEyeThreadRun){
-                    mEyeDataList.add((int) (mEyeCloseResult*10));
-                    mEyeDataList.add((int) (mLeftEyeCloseResult*10));
+                    mEyeDataList.add((int) (mEyeCloseResult*100));
+                    mEyeDataList.add( (int)(mLeftEyeCloseResult*100));
+                 //   Log.d("mEyeDataList", "run: start"+(int) (mEyeCloseResult*100));
 //                    int inte= (int) (mEyeCloseResult*10);
 //                    Log.d("ClassifierActivitytes", "run: "+inte);
                     if (mEyeDataList.size()>1000){
@@ -92,7 +93,7 @@ public class ClassifierActivity extends CameraActivity {
                         boolean isCloseState = true;
                         for (int i = 30; i >= 1; i--) {
                             int current = mEyeDataList.get(mEyeDataList.size() - i);
-                            if (current < 7) {
+                            if (current <=75) {
                                 isCloseState = false;
                             }
                         }
@@ -159,7 +160,7 @@ public class ClassifierActivity extends CameraActivity {
 
                faceOffset((int)(landmarkInfos.get(0).roll*1000),(int)(landmarkInfos.get(0).yaw*1000));
               tv_log.setText(info);
-              //  Log.e(TAG, info);
+               Log.e(" faceOffset", mEyeCloseResult+"--"+mLeftEyeCloseResult);
             }
 
        //     Log.d("#####", "processImage: " + faceDetectInfos.size());
