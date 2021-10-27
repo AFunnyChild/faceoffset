@@ -92,7 +92,7 @@ public class ClassifierActivity extends CameraActivity {
                         boolean isCloseState = true;
                         for (int i = 30; i >= 1; i--) {
                             int current = mEyeDataList.get(mEyeDataList.size() - i);
-                            if (current < 5) {
+                            if (current < 7) {
                                 isCloseState = false;
                             }
                         }
@@ -193,6 +193,6 @@ public class ClassifierActivity extends CameraActivity {
     }
     public static native   void  faceEyeClose();
     public static native   void  faceOffset(int roll,int yaw);
-   // public static    void  faceOffset(int roll,int yaw){};
-   // public static    void  faceEyeClose(){};
+//    public static    void  faceOffset(int roll,int yaw){};
+//    public static    void  faceEyeClose(){};
 }
