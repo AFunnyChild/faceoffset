@@ -86,21 +86,34 @@ public class ClassifierActivity extends CameraActivity {
                     if (mEyeDataList.size()>1000){
                         mEyeDataList.remove(0);
                     }
-                    if (mEyeDataList.size()>=2){
-                        float  current=mEyeDataList.get(mEyeDataList.size()-1);
-                        float  last=mEyeDataList.get(mEyeDataList.size()-2);
-                        if ( current >=3&&last>=3){
-                   runOnUiThread(new Runnable() {
-                       @Override
-                       public void run() {
-                           faceEyeClose();
-//                           no++;
-//                           Toast.makeText(ClassifierActivity.this, "close"+no+"/n"+current+"/n"+last, Toast.LENGTH_SHORT).show();
-                       }
-                   });
+                    if (mEyeDataList.size()>=15) {
+                        boolean isCloseState = true;
+                        for (int i = 15; i >= 1; i--) {
+                            int current = mEyeDataList.get(mEyeDataList.size() - i);
+                            if (current < 5) {
+                                isCloseState = false;
+                            }
                         }
-                    }
-                    SystemClock.sleep(1000);
+                        if(isCloseState){
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+
+//                                    Log.d("ClassifierActivitytes", "run: start");
+//                                    for (int i = 15; i >= 1; i--) {
+//                                        int current = mEyeDataList.get(mEyeDataList.size() - i);
+//                                        Log.d("ClassifierActivitytes", "run: "+current);
+//                                    }
+                                    mEyeDataList.clear();
+                                    faceEyeClose();
+                             //       no++;
+                                //    Toast.makeText(ClassifierActivity.this, "close"+no+"/n"+"/n", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }
+                        }
+
+                    SystemClock.sleep(100);
                 }
             }
         }.start();
@@ -177,5 +190,6 @@ public class ClassifierActivity extends CameraActivity {
     }
     public static native   void  faceEyeClose();
     public static native   void  faceOffset(int roll,int yaw);
-    //public static    void  faceOffset(int roll,int yaw){};
+//    public static    void  faceOffset(int roll,int yaw){};
+//    public static    void  faceEyeClose(){};
 }

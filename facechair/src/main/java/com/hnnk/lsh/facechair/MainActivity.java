@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, ClassifierActivity.class);
-                intent.putExtra("visible",false);
+                intent.putExtra("visible",true);
                 startActivity(intent);
             }
         });
