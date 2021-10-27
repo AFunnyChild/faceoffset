@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Canvas;
 import android.graphics.Rect;
+import android.os.SystemClock;
 import android.util.Log;
 import android.util.Size;
 import android.widget.TextView;
@@ -25,8 +26,12 @@ import com.tenginekit.face.FaceDetectInfo;
 import com.tenginekit.face.FaceLandmarkInfo;
 import com.tenginekit.model.TenginekitPoint;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 
 public class ClassifierActivity extends CameraActivity {
@@ -37,6 +42,10 @@ public class ClassifierActivity extends CameraActivity {
 
     private OverlayView trackingOverlay;
     TextView   tv_log;
+    NumberFormat nf = NumberFormat.getNumberInstance();
+     float  mEyeCloseResult=0;
+  List<Integer>  mEyeDataList=new ArrayList<>();
+  boolean  mEyeThreadRun=false;
     @Override
     protected int getLayoutId() {
         return R.layout.camera_connection_fragment;
@@ -57,8 +66,44 @@ public class ClassifierActivity extends CameraActivity {
     }
 
     @Override
+    public synchronized void onDestroy() {
+        super.onDestroy();
+        mEyeThreadRun=false;
+    }
+   int  no=0;
+    @Override
     public void onPreviewSizeChosen(final Size size) {
-
+        nf.setMaximumFractionDigits(2);
+        mEyeThreadRun=true;
+        new  Thread(){
+            @Override
+            public void run() {
+                super.run();
+                while (mEyeThreadRun){
+                    mEyeDataList.add((int) (mEyeCloseResult*10));
+//                    int inte= (int) (mEyeCloseResult*10);
+//                    Log.d("ClassifierActivitytes", "run: "+inte);
+                    if (mEyeDataList.size()>1000){
+                        mEyeDataList.remove(0);
+                    }
+                    if (mEyeDataList.size()>=2){
+                        float  current=mEyeDataList.get(mEyeDataList.size()-1);
+                        float  last=mEyeDataList.get(mEyeDataList.size()-2);
+                        if ( current >=3&&last>=3){
+                   runOnUiThread(new Runnable() {
+                       @Override
+                       public void run() {
+                           faceEyeClose();
+//                           no++;
+//                           Toast.makeText(ClassifierActivity.this, "close"+no+"/n"+current+"/n"+last, Toast.LENGTH_SHORT).show();
+                       }
+                   });
+                        }
+                    }
+                    SystemClock.sleep(1000);
+                }
+            }
+        }.start();
         Registe();
         EncoderBus.GetInstance().onSetFrameConfiguration(previewHeight, previewWidth);
 
@@ -91,8 +136,12 @@ public class ClassifierActivity extends CameraActivity {
             if (faceDetect.getFaceCount() > 0) {
                 faceDetectInfos = faceDetect.getDetectInfos();
                 landmarkInfos = faceDetect.landmark2d();
+                mEyeCloseResult=landmarkInfos.get(0).rightEyeClose;
+
               String  info= "roll="+ (int)landmarkInfos.get(0).roll+"- yaw"+(int)landmarkInfos.get(0).yaw;
-                faceOffset((int)(landmarkInfos.get(0).roll*1000),(int)(landmarkInfos.get(0).yaw*1000));
+            //  String  info= "lEye="+nf.format(landmarkInfos.get(0).leftEyeClose) +"- rEye"+nf.format(landmarkInfos.get(0).rightEyeClose) ;
+
+               faceOffset((int)(landmarkInfos.get(0).roll*1000),(int)(landmarkInfos.get(0).yaw*1000));
               tv_log.setText(info);
               //  Log.e(TAG, info);
             }
@@ -126,6 +175,7 @@ public class ClassifierActivity extends CameraActivity {
 
         });
     }
+    public static native   void  faceEyeClose();
     public static native   void  faceOffset(int roll,int yaw);
     //public static    void  faceOffset(int roll,int yaw){};
 }
