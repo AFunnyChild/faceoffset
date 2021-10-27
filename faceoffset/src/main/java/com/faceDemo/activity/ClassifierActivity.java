@@ -44,6 +44,7 @@ public class ClassifierActivity extends CameraActivity {
     TextView   tv_log;
     NumberFormat nf = NumberFormat.getNumberInstance();
      float  mEyeCloseResult=0;
+     float  mLeftEyeCloseResult=0;
   List<Integer>  mEyeDataList=new ArrayList<>();
   boolean  mEyeThreadRun=false;
     @Override
@@ -81,14 +82,15 @@ public class ClassifierActivity extends CameraActivity {
                 super.run();
                 while (mEyeThreadRun){
                     mEyeDataList.add((int) (mEyeCloseResult*10));
+                    mEyeDataList.add((int) (mLeftEyeCloseResult*10));
 //                    int inte= (int) (mEyeCloseResult*10);
 //                    Log.d("ClassifierActivitytes", "run: "+inte);
                     if (mEyeDataList.size()>1000){
                         mEyeDataList.remove(0);
                     }
-                    if (mEyeDataList.size()>=15) {
+                    if (mEyeDataList.size()>=30) {
                         boolean isCloseState = true;
-                        for (int i = 15; i >= 1; i--) {
+                        for (int i = 30; i >= 1; i--) {
                             int current = mEyeDataList.get(mEyeDataList.size() - i);
                             if (current < 5) {
                                 isCloseState = false;
@@ -100,7 +102,7 @@ public class ClassifierActivity extends CameraActivity {
                                 public void run() {
 
 //                                    Log.d("ClassifierActivitytes", "run: start");
-//                                    for (int i = 15; i >= 1; i--) {
+//                                    for (int i = 30; i >= 1; i--) {
 //                                        int current = mEyeDataList.get(mEyeDataList.size() - i);
 //                                        Log.d("ClassifierActivitytes", "run: "+current);
 //                                    }
@@ -150,6 +152,7 @@ public class ClassifierActivity extends CameraActivity {
                 faceDetectInfos = faceDetect.getDetectInfos();
                 landmarkInfos = faceDetect.landmark2d();
                 mEyeCloseResult=landmarkInfos.get(0).rightEyeClose;
+                mLeftEyeCloseResult=landmarkInfos.get(0).leftEyeClose;
 
               String  info= "roll="+ (int)landmarkInfos.get(0).roll+"- yaw"+(int)landmarkInfos.get(0).yaw;
             //  String  info= "lEye="+nf.format(landmarkInfos.get(0).leftEyeClose) +"- rEye"+nf.format(landmarkInfos.get(0).rightEyeClose) ;
@@ -190,6 +193,6 @@ public class ClassifierActivity extends CameraActivity {
     }
     public static native   void  faceEyeClose();
     public static native   void  faceOffset(int roll,int yaw);
-//    public static    void  faceOffset(int roll,int yaw){};
-//    public static    void  faceEyeClose(){};
+   // public static    void  faceOffset(int roll,int yaw){};
+   // public static    void  faceEyeClose(){};
 }
