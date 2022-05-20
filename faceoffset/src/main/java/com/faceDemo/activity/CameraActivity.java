@@ -82,13 +82,15 @@ public abstract class CameraActivity extends AppCompatActivity implements
         //设置为1像素大小
         WindowManager.LayoutParams params = window.getAttributes();
         params.flags = WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;
-
-        params.x = 0;
-        params.y = 0;
+        int xpos = getIntent().getIntExtra("xpos",0);
+        int ypos = getIntent().getIntExtra("ypos",0);
+        params.x = xpos;
+        params.y = ypos;
         params.width = 400;
         params.height = 400;
         params.alpha=0;
         boolean visible = getIntent().getBooleanExtra("visible", false);
+
         if (visible){
             params.alpha=100;
         }

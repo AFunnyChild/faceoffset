@@ -125,7 +125,11 @@ public class ClassifierActivity extends CameraActivity {
 
         trackingOverlay = (OverlayView) findViewById(R.id.facing_overlay);
         tv_log=findViewById(R.id.tv_log);
-        moveTaskToBack(true);
+        boolean visible = getIntent().getBooleanExtra("visible", false);
+        if (visible==false){
+            moveTaskToBack(true);
+        }
+      //
         trackingOverlay.addCallback(new OverlayView.DrawCallback() {
             @Override
             public void drawCallback(final Canvas canvas) {
@@ -137,12 +141,13 @@ public class ClassifierActivity extends CameraActivity {
     @Override
     protected void processImage() {
         if (sensorEventUtil!= null) {
+            //sensorEventUtil.orientation
             int degree = CameraEngine.getInstance().getCameraOrientation(sensorEventUtil.orientation);
             /**
              * 设置旋转角
              */
             KitCore.Camera.setRotation(degree - 90, false, (int) CameraActivity.ScreenWidth, (int) CameraActivity.ScreenHeight);
-
+         //   degree - 90
             /**
              * 获取人脸信息
              */
@@ -155,7 +160,7 @@ public class ClassifierActivity extends CameraActivity {
                 mEyeCloseResult=landmarkInfos.get(0).rightEyeClose;
                 mLeftEyeCloseResult=landmarkInfos.get(0).leftEyeClose;
 
-              String  info= "roll="+ (int)landmarkInfos.get(0).roll+"- yaw"+(int)landmarkInfos.get(0).yaw;
+              String  info= "r="+ (int)landmarkInfos.get(0).roll+" y="+(int)landmarkInfos.get(0).yaw;
             //  String  info= "lEye="+nf.format(landmarkInfos.get(0).leftEyeClose) +"- rEye"+nf.format(landmarkInfos.get(0).rightEyeClose) ;
 
                faceOffset((int)(landmarkInfos.get(0).roll*1000),(int)(landmarkInfos.get(0).yaw*1000));

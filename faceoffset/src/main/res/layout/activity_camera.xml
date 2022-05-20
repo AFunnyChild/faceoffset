@@ -17,6 +17,7 @@
             android:layout_height="match_parent"
             android:background="@color/main_text_color_edit" />
 
+
         <Button
             android:layout_marginTop="20dp"
             android:layout_below="@+id/detect"
@@ -28,10 +29,22 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true"
             android:text="点击关闭"
-            android:textSize="20dp"
+            android:textSize="30dp"
+
             android:topRightRadius="20dp"
             android:bottomRightRadius="20dp"
 
             android:bottomLeftRadius="20dp"/>
+        <TextView
+            android:layout_alignTop ="@+id/btn_face_close"
+            android:layout_toLeftOf ="@+id/btn_face_close"
+            android:background="#00ff00"
+            android:id="@+id/tv_log"
+            android:textColor="#ff0000"
+            android:gravity="center"
+            android:textSize="40dp"
+            android:text="1111"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"/>
     </RelativeLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
