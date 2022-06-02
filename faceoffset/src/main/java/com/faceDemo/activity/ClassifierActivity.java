@@ -165,7 +165,13 @@ public class ClassifierActivity extends CameraActivity {
 
                faceOffset((int)(landmarkInfos.get(0).roll*1000),(int)(landmarkInfos.get(0).yaw*1000));
               tv_log.setText(info);
-               Log.e(" faceOffset", mEyeCloseResult+"--"+mLeftEyeCloseResult);
+                Rect boundingBox = landmarkInfos.get(0).getBoundingBox();
+               // Log.e(" faceOffset", mEyeCloseResult+"--"+mLeftEyeCloseResult);
+                int xabs = Math.abs(boundingBox.left - boundingBox.right);
+                int yabs = Math.abs(boundingBox.top - boundingBox.bottom);
+                faceSize(xabs,yabs);
+               // Log.e(" faceOffset", xabs+"--"+yabs);
+                //Log.e(" faceOffset", boundingBox.left+"-"+boundingBox.top+"--"+boundingBox.right+"--"+boundingBox.bottom);
             }
 
        //     Log.d("#####", "processImage: " + faceDetectInfos.size());
@@ -199,6 +205,8 @@ public class ClassifierActivity extends CameraActivity {
     }
     public static native   void  faceEyeClose();
     public static native   void  faceOffset(int roll,int yaw);
+    public static  native  void  faceSize(int width,int height);
 //    public static    void  faceOffset(int roll,int yaw){};
+//    public static    void  faceSize(int width,int height){};
 //    public static    void  faceEyeClose(){};
 }
