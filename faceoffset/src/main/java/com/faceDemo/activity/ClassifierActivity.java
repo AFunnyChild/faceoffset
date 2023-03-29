@@ -157,19 +157,34 @@ public class ClassifierActivity extends CameraActivity {
             if (faceDetect.getFaceCount() > 0) {
                 faceDetectInfos = faceDetect.getDetectInfos();
                 landmarkInfos = faceDetect.landmark2d();
-                mEyeCloseResult=landmarkInfos.get(0).rightEyeClose;
-                mLeftEyeCloseResult=landmarkInfos.get(0).leftEyeClose;
+                FaceLandmarkInfo selectface=null;
+                for (FaceLandmarkInfo landmarkInfo : landmarkInfos) {
+                    Rect boundingBox = landmarkInfos.get(0).getBoundingBox();
+                    // Log.e(" faceOffset", mEyeCloseResult+"--"+mLeftEyeCloseResult);
+                    int xabs = Math.abs(boundingBox.left - boundingBox.right);
+                    int yabs = Math.abs(boundingBox.top - boundingBox.bottom);
+                    if(xabs>300&&yabs>300){
+                        //Log.e(" faceSize", xabs+"--"+yabs);
+                        selectface=landmarkInfo;
+                    }
+                }
+                if(selectface!=null){
+                    String  info= "r="+ (int)selectface.roll+" y="+(int)selectface.yaw;
+                    //  String  info= "lEye="+nf.format(landmarkInfos.get(0).leftEyeClose) +"- rEye"+nf.format(landmarkInfos.get(0).rightEyeClose) ;
+                    faceOffset((int)(selectface.roll*1000),(int)(selectface.yaw*1000));
+                    tv_log.setText(info);
+                    Rect boundingBox = selectface.getBoundingBox();
+                    // Log.e(" faceOffset", mEyeCloseResult+"--"+mLeftEyeCloseResult);
+                    int xabs1 = Math.abs(boundingBox.left - boundingBox.right);
+                    int yabs1 = Math.abs(boundingBox.top - boundingBox.bottom);
+                    faceSize(xabs1,yabs1);
+                    mEyeCloseResult=selectface.rightEyeClose;
+                    mLeftEyeCloseResult=selectface.leftEyeClose;
+                    //Log.e(" faceSize", xabs1+"--"+yabs1);
+                }
 
-              String  info= "r="+ (int)landmarkInfos.get(0).roll+" y="+(int)landmarkInfos.get(0).yaw;
-            //  String  info= "lEye="+nf.format(landmarkInfos.get(0).leftEyeClose) +"- rEye"+nf.format(landmarkInfos.get(0).rightEyeClose) ;
 
-               faceOffset((int)(landmarkInfos.get(0).roll*1000),(int)(landmarkInfos.get(0).yaw*1000));
-              tv_log.setText(info);
-                Rect boundingBox = landmarkInfos.get(0).getBoundingBox();
-               // Log.e(" faceOffset", mEyeCloseResult+"--"+mLeftEyeCloseResult);
-                int xabs = Math.abs(boundingBox.left - boundingBox.right);
-                int yabs = Math.abs(boundingBox.top - boundingBox.bottom);
-                faceSize(xabs,yabs);
+
                // Log.e(" faceOffset", xabs+"--"+yabs);
                 //Log.e(" faceOffset", boundingBox.left+"-"+boundingBox.top+"--"+boundingBox.right+"--"+boundingBox.bottom);
             }
