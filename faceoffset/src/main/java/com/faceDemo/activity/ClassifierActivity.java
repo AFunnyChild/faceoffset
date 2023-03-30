@@ -28,6 +28,8 @@ import com.tenginekit.model.TenginekitPoint;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -158,14 +160,18 @@ public class ClassifierActivity extends CameraActivity {
                 faceDetectInfos = faceDetect.getDetectInfos();
                 landmarkInfos = faceDetect.landmark2d();
                 FaceLandmarkInfo selectface=null;
+                Collections.sort(landmarkInfos,new PersonComparator() );
                 for (FaceLandmarkInfo landmarkInfo : landmarkInfos) {
-                    Rect boundingBox = landmarkInfos.get(0).getBoundingBox();
+                    // 使用匿名比较器排序
+
+                    Rect boundingBox = landmarkInfo.getBoundingBox();
                     // Log.e(" faceOffset", mEyeCloseResult+"--"+mLeftEyeCloseResult);
                     int xabs = Math.abs(boundingBox.left - boundingBox.right);
                     int yabs = Math.abs(boundingBox.top - boundingBox.bottom);
                     if(xabs>300&&yabs>300){
                         //Log.e(" faceSize", xabs+"--"+yabs);
                         selectface=landmarkInfo;
+                        break;
                     }
                 }
                 if(selectface!=null){
@@ -218,7 +224,26 @@ public class ClassifierActivity extends CameraActivity {
 
         });
     }
-    public static native   void  faceEyeClose();
+
+
+    /**
+     * 新建 Person 比较器
+     */
+    class PersonComparator implements Comparator<FaceLandmarkInfo> {
+        @Override
+        public int compare(FaceLandmarkInfo p1, FaceLandmarkInfo p2) {
+            Rect boundingBox1 = p1.getBoundingBox();
+            int xabs1 = Math.abs(boundingBox1.left - boundingBox1.right);
+            int yabs1 = Math.abs(boundingBox1.top - boundingBox1.bottom);
+            int  size1=xabs1*yabs1;
+            Rect boundingBox2 = p1.getBoundingBox();
+            int xabs2 = Math.abs(boundingBox2.left - boundingBox2.right);
+            int yabs2 = Math.abs(boundingBox2.top - boundingBox2.bottom);
+            int  size2=xabs2*yabs2;
+            return size2-size1;
+        }
+    }
+        public static native   void  faceEyeClose();
     public static native   void  faceOffset(int roll,int yaw);
     public static  native  void  faceSize(int width,int height);
 //    public static    void  faceOffset(int roll,int yaw){};
