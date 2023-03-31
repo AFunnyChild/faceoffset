@@ -81,7 +81,7 @@ public abstract class CameraActivity extends AppCompatActivity implements
 
         //设置为1像素大小
         WindowManager.LayoutParams params = window.getAttributes();
-        params.flags = WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;
+
         int xpos = getIntent().getIntExtra("xpos",0);
         int ypos = getIntent().getIntExtra("ypos",0);
         params.x = xpos;
@@ -93,6 +93,9 @@ public abstract class CameraActivity extends AppCompatActivity implements
 
         if (visible){
             params.alpha=100;
+        }else{
+            //不可触摸
+            params.flags = WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;
         }
         window.setAttributes(params);
         setContentView(R.layout.activity_camera);

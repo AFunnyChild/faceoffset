@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, ClassifierActivity.class);
                 intent.putExtra("visible",true);
-                intent.putExtra("xpos",0);
+                intent.putExtra("xpos",1600);
                 intent.putExtra("ypos",0);
                 startActivity(intent);
             }
