@@ -181,9 +181,9 @@ public class ClassifierActivity extends CameraActivity {
                     tv_log.setText(info);
                     Rect boundingBox = selectface.getBoundingBox();
                     // Log.e(" faceOffset", mEyeCloseResult+"--"+mLeftEyeCloseResult);
-                    int xabs1 = Math.abs(boundingBox.left - boundingBox.right);
-                    int yabs1 = Math.abs(boundingBox.top - boundingBox.bottom);
-                    faceSize(xabs1,yabs1);
+//                    int xabs1 = Math.abs(boundingBox.left - boundingBox.right);
+//                    int yabs1 = Math.abs(boundingBox.top - boundingBox.bottom);
+                    faceSize(boundingBox.left,boundingBox.right,boundingBox.bottom,boundingBox.top);
                     mEyeCloseResult=selectface.rightEyeClose;
                     mLeftEyeCloseResult=selectface.leftEyeClose;
                     //Log.e(" faceSize", xabs1+"--"+yabs1);
@@ -245,7 +245,7 @@ public class ClassifierActivity extends CameraActivity {
     }
         public static native   void  faceEyeClose();
     public static native   void  faceOffset(int roll,int yaw);
-    public static  native  void  faceSize(int width,int height);
+    public static  native  void  faceSize(int left,int right,int bottom,int top);
 //    public static    void  faceOffset(int roll,int yaw){};
 //    public static    void  faceSize(int width,int height){};
 //    public static    void  faceEyeClose(){};
