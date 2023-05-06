@@ -84,10 +84,12 @@ public abstract class CameraActivity extends AppCompatActivity implements
 
         int xpos = getIntent().getIntExtra("xpos",0);
         int ypos = getIntent().getIntExtra("ypos",0);
+        int width = getIntent().getIntExtra("width",400);
+        int height = getIntent().getIntExtra("height",400);
         params.x = xpos;
         params.y = ypos;
-        params.width = 400;
-        params.height = 400;
+        params.width = width;
+        params.height = height;
         params.alpha=0;
         boolean visible = getIntent().getBooleanExtra("visible", false);
 
