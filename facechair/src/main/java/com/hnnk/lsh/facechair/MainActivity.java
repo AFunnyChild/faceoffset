@@ -34,8 +34,8 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra("visible",true);
                 intent.putExtra("xpos",0);
                 intent.putExtra("ypos",0);
-                intent.putExtra("width",1920);
-                intent.putExtra("height",1080);
+                intent.putExtra("width",1200);
+                intent.putExtra("height",1200);
                 startActivity(intent);
             }
         });

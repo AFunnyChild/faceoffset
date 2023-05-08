@@ -25,6 +25,7 @@ import android.util.Log;
 import android.util.Size;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 
@@ -109,6 +110,11 @@ public abstract class CameraActivity extends AppCompatActivity implements
                 finish();
             }
         });
+        View container_main = findViewById(R.id.container_main);
+        ViewGroup.LayoutParams layoutParams = container_main.getLayoutParams();
+        layoutParams.width = width;
+        layoutParams.height=height;
+        container_main.setLayoutParams(layoutParams);
 
         startVideoWithFaceDetected();
 

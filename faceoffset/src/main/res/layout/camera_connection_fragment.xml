@@ -18,6 +18,7 @@
     android:id="@+id/ll_face_content"
     android:rotation="270"
     android:orientation="vertical"
+    android:background="@color/camera_colorPressed"
     android:layout_height="match_parent">
 
     <com.faceDemo.currencyview.AutoFitTextureView

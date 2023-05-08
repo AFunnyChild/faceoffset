@@ -9,6 +9,8 @@ import android.graphics.Rect;
 import android.os.SystemClock;
 import android.util.Log;
 import android.util.Size;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -56,7 +58,7 @@ public class ClassifierActivity extends CameraActivity {
 
     @Override
     protected Size getDesiredPreviewFrameSize() {
-        return new Size(1280, 960);
+        return new Size(800, 600);
     }
 
     public void Registe() {
@@ -128,9 +130,12 @@ public class ClassifierActivity extends CameraActivity {
         trackingOverlay = (OverlayView) findViewById(R.id.facing_overlay);
         tv_log=findViewById(R.id.tv_log);
         boolean visible = getIntent().getBooleanExtra("visible", false);
+
+
         if (visible==false){
             moveTaskToBack(true);
         }
+
       //
         trackingOverlay.addCallback(new OverlayView.DrawCallback() {
             @Override
@@ -144,7 +149,8 @@ public class ClassifierActivity extends CameraActivity {
     protected void processImage() {
         if (sensorEventUtil!= null) {
             //sensorEventUtil.orientation
-            int degree = CameraEngine.getInstance().getCameraOrientation(sensorEventUtil.orientation);
+           // int degree = CameraEngine.getInstance().getCameraOrientation(sensorEventUtil.orientation);
+           int degree = CameraEngine.getInstance().getCameraOrientation(sensorEventUtil.orientation);
             /**
              * 设置旋转角
              */
@@ -247,6 +253,6 @@ public class ClassifierActivity extends CameraActivity {
     public static native   void  faceOffset(int roll,int yaw);
     public static  native  void  faceSize(int left,int right,int bottom,int top);
 //    public static    void  faceOffset(int roll,int yaw){};
-//    public static    void  faceSize(int width,int height){};
+//    public static    void  faceSize(int left,int right,int bottom,int top){};
 //    public static    void  faceEyeClose(){};
 }

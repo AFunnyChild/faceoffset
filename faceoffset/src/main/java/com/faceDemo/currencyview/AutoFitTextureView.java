@@ -17,10 +17,18 @@
 package com.faceDemo.currencyview;
 
 import android.content.Context;
+import android.graphics.SurfaceTexture;
+import android.media.MediaPlayer;
 import android.util.AttributeSet;
+import android.util.Log;
+import android.view.Gravity;
+import android.view.Surface;
 import android.view.TextureView;
+import android.widget.FrameLayout;
 
 import com.faceDemo.activity.CameraActivity;
+
+import java.io.IOException;
 
 /**
  * A {@link TextureView} that can be adjusted to a specified aspect ratio.
@@ -31,14 +39,17 @@ public class AutoFitTextureView extends TextureView {
 
     public AutoFitTextureView(final Context context) {
         this(context, null);
+
     }
 
     public AutoFitTextureView(final Context context, final AttributeSet attrs) {
         this(context, attrs, 0);
+
     }
 
     public AutoFitTextureView(final Context context, final AttributeSet attrs, final int defStyle) {
         super(context, attrs, defStyle);
+
     }
 
     /**
@@ -83,6 +94,8 @@ public class AutoFitTextureView extends TextureView {
                 CameraActivity.ScreenHeight = height;
                 setMeasuredDimension(height * ratioWidth / ratioHeight, height);
             }
+           // setMeasuredDimension(1920,1080);
+
         }
     }
 }
